@@ -1,5 +1,6 @@
 async function resolvedWithRejectionNumCheck(promisesToHandle, maxRejectedNum) {
     var resolved = 0, rejected = 0;
+    maxRejectedNum = maxRejectedNum < 0 ? 0 : maxRejectedNum;
 
     await promisesToHandle.map(prms => prms()
     .then(value => {
