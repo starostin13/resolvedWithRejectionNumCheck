@@ -31,6 +31,21 @@ test('maxRejectedNum is 100', async () => {
   return result;
 });
 
+test('maxRejectedNum is greater than int32', async () => {
+  var random = Math.floor(Math.random() * 10);
+  let promises = [...new Array(random)];
+  
+  for(let i=0; i < random; i++) {
+    promises[i] = () => getPromise();
+  }
+  
+  var result  = resolvedWithRejectionNumCheck(promises, Number.MAX_SAFE_INTEGER + 1).then(data => {
+    expect(data).toMatch('acceptable');
+  });
+  
+  return result;
+});
+
 test('maxRejectedNum is null', async () => {
   var random = Math.floor(Math.random() * 10);
   let promises = [...new Array(random)];
