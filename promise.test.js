@@ -16,6 +16,21 @@ test('maxRejectedNum is -1', async () => {
   return result;
 });
 
+test('maxRejectedNum is 100', async () => {
+  var random = Math.floor(Math.random() * 10);
+  let promises = [...new Array(random)];
+  
+  for(let i=0; i < random; i++) {
+    promises[i] = () => getPromise();
+  }
+  
+  var result  = resolvedWithRejectionNumCheck(promises, -1).then(data => {
+    expect(data).toMatch('acceptable');
+  });
+  
+  return result;
+});
+
 test('maxRejectedNum is null', async () => {
   var random = Math.floor(Math.random() * 10);
   let promises = [...new Array(random)];
