@@ -1,13 +1,9 @@
 const getPromise = require('./promise');
+const getRandomArray = require('./getRandomArray.js');
 const resolvedWithRejectionNumCheck = require('./resolvedWithRejectionNumCheck.js');
 
 test('maxRejectedNum is -1', async () => {
-  var random = Math.floor(Math.random() * 10);
-  let promises = [...new Array(random)];
-  
-  for(let i=0; i < random; i++) {
-    promises[i] = () => getPromise();
-  }
+  let promises = getRandomArray();
   
   var result  = resolvedWithRejectionNumCheck(promises, -1).then(data => {
     expect(data).toMatch('acceptable');
@@ -17,12 +13,7 @@ test('maxRejectedNum is -1', async () => {
 });
 
 test('maxRejectedNum is 100', async () => {
-  var random = Math.floor(Math.random() * 10);
-  let promises = [...new Array(random)];
-  
-  for(let i=0; i < random; i++) {
-    promises[i] = () => getPromise();
-  }
+  let promises = getRandomArray();
   
   var result  = resolvedWithRejectionNumCheck(promises, -1).then(data => {
     expect(data).toMatch('acceptable');
@@ -32,12 +23,7 @@ test('maxRejectedNum is 100', async () => {
 });
 
 test('maxRejectedNum is greater than int32', async () => {
-  var random = Math.floor(Math.random() * 10);
-  let promises = [...new Array(random)];
-  
-  for(let i=0; i < random; i++) {
-    promises[i] = () => getPromise();
-  }
+  let promises = getRandomArray();
   
   var result  = resolvedWithRejectionNumCheck(promises, Number.MAX_SAFE_INTEGER + 1).then(data => {
     expect(data).toMatch('acceptable');
@@ -47,12 +33,7 @@ test('maxRejectedNum is greater than int32', async () => {
 });
 
 test('maxRejectedNum is null', async () => {
-  var random = Math.floor(Math.random() * 10);
-  let promises = [...new Array(random)];
-  
-  for(let i=0; i < random; i++) {
-    promises[i] = () => getPromise();
-  }
+  let promises = getRandomArray();
   
   var result  = resolvedWithRejectionNumCheck(promises, null).then(data => {
     expect(data).toMatch('acceptable');
@@ -62,12 +43,7 @@ test('maxRejectedNum is null', async () => {
 });
 
 test('resolves if amount of rejected promises from promisesToHandle is not greater than 10', async () => {
-  var random = Math.floor(Math.random() * 10);
-  let promises = [...new Array(random)];
-
-  for(let i=0; i < random; i++) {
-    promises[i] = () => getPromise();
-  }
+  let promises = getRandomArray();
   
   var result  = resolvedWithRejectionNumCheck(promises, 10).then(data => {
     expect(data).toMatch('acceptable');
