@@ -75,3 +75,33 @@ test('resolves if amount of rejected promises from promisesToHandle is not great
   
   return result;
 });
+
+test('promisesToHandle is empty', async () => {
+  let promises = [];
+  
+  var result  = resolvedWithRejectionNumCheck(promises, 10).then(data => {
+    expect(data).toMatch('acceptable');
+  });
+  
+  return result;
+});
+
+test('promisesToHandle is null', async () => {
+  let promises = null;
+  
+  var result  = resolvedWithRejectionNumCheck(promises, 10).then(data => {
+    expect(data).toMatch('acceptable');
+  });
+  
+  return result;
+});
+
+test('promisesToHandle is undefined', async () => {
+  let promises = undefined;
+  
+  var result  = resolvedWithRejectionNumCheck(promises, 10).then(data => {
+    expect(data).toMatch('acceptable');
+  });
+  
+  return result;
+});
