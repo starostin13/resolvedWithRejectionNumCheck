@@ -2,13 +2,19 @@ async function resolvedWithRejectionNumCheck(promisesToHandle, maxRejectedNum) {
     var resolved = 0, rejected = 0;
     maxRejectedNum = maxRejectedNum < 0 ? 0 : maxRejectedNum;
 
-    await promisesToHandle.map(prms => prms()
-    .then(value => {
-        resolved++;
-    })
-    .catch(err => {
-        rejected++
-    }));
+    if(promisesToHandle) {
+        await promisesToHandle.map(prms => prms()
+        .then(value => {
+            resolved++;
+        })
+        .catch(err => {
+            rejected++
+        }));
+    } else {
+        return new Promise((resolve) => {
+            resolve('list of promises is empty, that acceptable for check')
+        });
+    }
 
     return new Promise((resolve, reject) => {
         if (promisesToHandle.length - resolved <= maxRejectedNum) {        
